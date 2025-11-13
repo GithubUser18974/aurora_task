@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
 class LoadingPlaceholder extends StatelessWidget {
-  const LoadingPlaceholder({
-    super.key,
-    required this.backgroundColor,
-  });
+  const LoadingPlaceholder({super.key, required this.backgroundColor});
 
   final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
+    if (backgroundColor == Colors.transparent) {
+      return const Center(child: CircularProgressIndicator.adaptive());
+    }
     return DecoratedBox(
       decoration: BoxDecoration(color: backgroundColor),
-      child: const Center(
-        child: CircularProgressIndicator.adaptive(),
-      ),
+      child: const Center(child: CircularProgressIndicator.adaptive()),
     );
   }
 }
@@ -33,19 +31,14 @@ class LoadingOverlay extends StatelessWidget {
         decoration: BoxDecoration(
           color: theme.colorScheme.surface.withValues(alpha: 0.12),
         ),
-        child: const Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
+        child: const Center(child: CircularProgressIndicator.adaptive()),
       ),
     );
   }
 }
 
 class ErrorPlaceholder extends StatelessWidget {
-  const ErrorPlaceholder({
-    super.key,
-    required this.onRetry,
-  });
+  const ErrorPlaceholder({super.key, required this.onRetry});
 
   final VoidCallback onRetry;
 
@@ -63,10 +56,7 @@ class ErrorPlaceholder extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.wifi_off,
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
+              Icon(Icons.wifi_off, color: theme.colorScheme.onSurfaceVariant),
               const SizedBox(height: 12),
               Text(
                 'Unable to load image',
@@ -87,6 +77,3 @@ class ErrorPlaceholder extends StatelessWidget {
     );
   }
 }
-
-
-
